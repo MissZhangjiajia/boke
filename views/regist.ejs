@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>注册</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/stylesheets/regist.css"/>
+		<script src="/javascripts/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/javascripts/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<form class="form-horizontal regist">
+			<h3 class="text-center">注册</h3>
+			<div class="tishi">
+			已有账号？<a href="/login" class="login">请登录></a>
+			</div>
+			<div class="form-group">
+				<label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="username" placeholder="手机号">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="password" placeholder="密码">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default" id="btn">注册</button>
+				</div>
+			</div>
+		</form>
+		<script>
+			$(function() {
+			 $('#username').blur(()=>{				 	
+				var reg =/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/
+		        if (!reg.test($('#username').val()))
+		        {		           
+	          	 $('#username').val("格式错误！").css("color","orange");
+	            return false;
+		        }else{
+		        	 $('#username').css("color","block");
+		        }
+		     })
+			 $('#password').blur(()=>{				 	
+				var reg =/^[a-z]{3}\d{3,}$/
+		        if (!reg.test($('#password').val()))
+		        {		           
+	          	 $('#password').val("格式错误！").css("color","orange");
+	            return false;
+		        }else{
+		        	 $('#password').css("color","block");
+		        }
+		     })
+				$("#btn").on("click", (e) => {
+					e.preventDefault();
+					$.post("/users/regist",{
+						username: $("#username").val(),
+						password: $("#password").val()
+					}).done((data) => {
+						if(data == 0) {
+							alert("该用户名已被占用")
+						} else {
+							alert("注册成功")
+							location.href = "/login"
+						}
+					})
+				})
+			})
+		</script>
+	</body>
+
+</html>

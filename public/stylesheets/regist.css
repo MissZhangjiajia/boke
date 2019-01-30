@@ -1,0 +1,14 @@
+.regist{
+	width:600px;
+	margin: 100px auto;
+	border: 3px double #00B7FF;
+	padding: 30px 20px;
+}
+.regist h3{
+	color: #f00;
+	padding: 10px;
+}
+.tishi{
+	width: 100%;
+	text-align: end;
+}
