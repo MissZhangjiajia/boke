@@ -1,0 +1,27 @@
+.link{
+	display: block;
+}
+.link a{
+	float: left;
+}
+.link span{
+	float: left;
+	padding-top:15px;
+}
+.link .caret{
+	float: left;
+	margin:25px 20px 5px 20px;
+}
+.link .dropdown span{
+	float: left;
+}
+.link .dropdown a:last-of-type{
+	padding-top: 15px;
+	float: left;
+}
+.dropdown-menu{
+	top: 49.8px;
+}
+.navbar{
+	margin-bottom: 0;
+}

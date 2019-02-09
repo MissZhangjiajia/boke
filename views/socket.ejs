@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://cdn.bootcss.com/socket.io/2.2.0/socket.io.js"></script>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	</head>
+	<body>
+		<h1>简易聊天</h1>
+		<div id="chatList"></div>
+		<textarea cols="50" rows="10"></textarea>
+		<br>
+		<input type="button" value="聊天">
+		<script type="text/javascript">
+			//console.log(io);
+			var io = io();
+			//监听数据
+			io.on("message",(msg)=>{
+				$("#chatList").append("<p>"+msg+"</p>");
+				
+			})
+			//发送数据
+			$("input").click(function(){
+				io.emit("chat message",$("textarea").val());
+			})
+		</script>
+	</body>
+</html>

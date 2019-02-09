@@ -2,7 +2,10 @@ var express = require('express');
 var router = express.Router();
 var MongoClient = require("mongodb").MongoClient;
 var url="mongodb://localhost:27017";
-
+var app = express();
+const http = require("http");
+let server = http.createServer(app);
+let io = require("socket.io")(server);
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
@@ -47,6 +50,15 @@ router.post("/login",(req,res)=>{
 			db.close();	
 		})
 			
+	})
+})
+app.get("/text",(req,res)=>{
+	res.sendFile(__dirname+"/text.ejs");
+});
+io.on("connection",(client)=>{
+	client.on("chat message",(msg)=>{
+		console.log(msg);
+		io.emit("message",msg);
 	})
 })
 module.exports = router;

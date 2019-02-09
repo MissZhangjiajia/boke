@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>首页</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/index.css"/>
+    <script src="https://cdn.bootcss.com/socket.io/2.2.0/socket.io.js"></script>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  </head>
+  <body>
+  	<!--正文-->
+  	<div class="text">
+	<h1>标题</h1>
+	<p>内容</p>
+	</div>
+	<!--评论-->
+	<div class="pinglun">
+				<h1>简易聊天</h1>
+		<div id="chatList"></div>
+		<textarea cols="50" rows="10"></textarea>
+		<br>
+		<input type="button" value="聊天">
+	
+	</div>
+		<script type="text/javascript">
+			//console.log(io);
+			var io = io();
+			//监听数据
+			io.on("message",(msg)=>{
+				$("#chatList").append("<p>"+msg+"</p>");
+				
+			})
+			//发送数据
+			$("input").click(function(){
+				io.emit("chat message",$("textarea").val());
+			})
+			</script>
+  </body>
+</html>
